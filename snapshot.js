@@ -8,7 +8,7 @@ const snapshot = async () => {
   var nftOwners = null;
 
   const options = {
-    address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+    address: "0xc175da1b577e3108164900f5231aef20d5e57a85",
     chain: "0x1",
   };
 
@@ -16,7 +16,7 @@ const snapshot = async () => {
     const singleOwners = new Map();
 
     nftOwners = await Moralis.Web3API.token.getNFTOwners(options);
-    let totalEntries = nftOwners.page * 500;
+    let totalEntries = nftOwners.page * 25;
 
     while (totalEntries < nftOwners.total) {
       for (let i = 0; i < nftOwners.page_size; i++) {
@@ -32,7 +32,7 @@ const snapshot = async () => {
 
       options.cursor = nftOwners.cursor;
       nftOwners = await Moralis.Web3API.token.getNFTOwners(options);
-      totalEntries = nftOwners.page * 500;
+      totalEntries = nftOwners.page * 25;
     }
 
     const data = Object.fromEntries(singleOwners);
